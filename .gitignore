@@ -1,0 +1,60 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+*.o
+*.a
+*.dylib
+
+# Build directories
+build/
+dist/
+*.egg-info/
+*.egg
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Nsight profiling
+*.qdrep
+*.sqlite
+*.ncu-rep
+*.nsys-rep
+
+# Python virtual environments
+.venv/
+venv/
+env/
+.env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files (too large for git)
+data/
+datasets/
+*.h5
+*.hdf5
+*.fvecs
+*.ivecs
+*.bvecs
+
+#for local development(owners only)
+locall_dev/
