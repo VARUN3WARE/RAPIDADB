@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel", "torch>=2.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rapidadb"
+version = "0.1.0"
+description = "RapidaDB — GPU-Native Vector Database"
+requires-python = ">=3.10"
+dynamic = ["authors", "dependencies", "optional-dependencies"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests/python"]
+addopts = "-v --tb=short"
