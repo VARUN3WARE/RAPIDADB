@@ -24,19 +24,21 @@ binding_sources = [
 all_sources = kernel_sources + index_sources + binding_sources
 
 # ─── Compiler Flags ──────────────────────────────────────────
-cxx_flags = ["-O3", "-std=c++17"]
+cxx_flags = ["-O3", "-std=c++14"]
 nvcc_flags = [
     "-O3",
     "--use_fast_math",
     "--expt-relaxed-constexpr",
     "--extended-lambda",
-    "-std=c++17",
+    "-std=c++14",
+    "-Xcompiler", "-fno-gnu-unique",
+    "-D_GLIBCXX_USE_CXX11_ABI=0",
 ]
 
 # Debug mode
 if os.environ.get("RAPIDADB_DEBUG", "0") == "1":
-    cxx_flags = ["-g", "-O0", "-std=c++17"]
-    nvcc_flags = ["-G", "-g", "-lineinfo", "-std=c++17"]
+    cxx_flags = ["-g", "-O0", "-std=c++14"]
+    nvcc_flags = ["-G", "-g", "-lineinfo", "-std=c++14"]
 
 # ─── Extension Module ────────────────────────────────────────
 ext_modules = [

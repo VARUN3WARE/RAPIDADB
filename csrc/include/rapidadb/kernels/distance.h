@@ -13,23 +13,36 @@ namespace rapidadb {
 // Output:
 //   distances — [batch_size, num_vectors], float32, CUDA
 
-/// Compute cosine similarity between query batch and database vectors.
-/// Returns similarity scores (higher = more similar).
+// ─── Naive Implementations (Week 1) ─────────────────────────
+
 torch::Tensor cosine_similarity_cuda(
     const torch::Tensor& queries,
     const torch::Tensor& database
 );
 
-/// Compute squared L2 distance between query batch and database vectors.
-/// Returns distances (lower = more similar).
 torch::Tensor l2_distance_cuda(
     const torch::Tensor& queries,
     const torch::Tensor& database
 );
 
-/// Compute dot product between query batch and database vectors.
-/// Returns dot products (higher = more similar for normalized vectors).
 torch::Tensor dot_product_cuda(
+    const torch::Tensor& queries,
+    const torch::Tensor& database
+);
+
+// ─── Optimized Implementations (Week 2) ─────────────────────
+
+torch::Tensor cosine_similarity_cuda_optimized(
+    const torch::Tensor& queries,
+    const torch::Tensor& database
+);
+
+torch::Tensor l2_distance_cuda_optimized(
+    const torch::Tensor& queries,
+    const torch::Tensor& database
+);
+
+torch::Tensor dot_product_cuda_optimized(
     const torch::Tensor& queries,
     const torch::Tensor& database
 );
