@@ -32,14 +32,6 @@ queries = torch.randn(32, 768, device='cuda')
 distances, indices = db.search(queries, k=10)
 ```
 
-## Performance
-
-| Metric                      | RapidaDB | FAISS-GPU |
-| --------------------------- | -------- | --------- |
-| Latency (10M, batch=1)      | TBD      | ~1.5 ms   |
-| Throughput (10M, batch=128) | TBD      | ~60K QPS  |
-| Recall@10 (IVF-PQ)          | TBD      | ~95%      |
-
 ## Build
 
 ### Prerequisites

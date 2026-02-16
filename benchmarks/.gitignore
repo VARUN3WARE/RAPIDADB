@@ -1,0 +1,21 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Benchmark outputs
+*.log
+*.ncu-rep
+*.qdrep
+profile/
+
+# Data files
+data/*.bin
+data/*.fvecs
+data/*.ivecs
+
+# Keep results folder structure but ignore large files
+results/*.ncu-rep
+results/*.log
