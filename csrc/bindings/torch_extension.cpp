@@ -29,31 +29,18 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
         .value("INT8", Precision::INT8);
 
     // ─── Distance Kernels ───────────────────────────────────
+    // Auto-selects optimized kernels when dim <= 128
     
-    // Naive implementations
     m.def("cosine_similarity", &cosine_similarity_cuda,
-          "Cosine similarity (CUDA, naive)",
+          "Cosine similarity (CUDA)",
           py::arg("queries"), py::arg("database"));
 
     m.def("l2_distance", &l2_distance_cuda,
-          "Squared L2 distance (CUDA, naive)",
+          "Squared L2 distance (CUDA)",
           py::arg("queries"), py::arg("database"));
 
     m.def("dot_product", &dot_product_cuda,
-          "Dot product (CUDA, naive)",
-          py::arg("queries"), py::arg("database"));
-    
-    // Optimized implementations
-    m.def("cosine_similarity_optimized", &cosine_similarity_cuda_optimized,
-          "Cosine similarity (CUDA, optimized)",
-          py::arg("queries"), py::arg("database"));
-
-    m.def("l2_distance_optimized", &l2_distance_cuda_optimized,
-          "Squared L2 distance (CUDA, optimized)",
-          py::arg("queries"), py::arg("database"));
-
-    m.def("dot_product_optimized", &dot_product_cuda_optimized,
-          "Dot product (CUDA, optimized)",
+          "Dot product (CUDA)",
           py::arg("queries"), py::arg("database"));
 
     // ─── Top-K ──────────────────────────────────────────────
