@@ -54,6 +54,10 @@ set(INDEX_SOURCES
     csrc/index/flat_index.cpp
 )
 
+set(CORE_SOURCES
+    csrc/core/stream_pool.cpp
+)
+
 set(BINDING_SOURCES
     csrc/bindings/torch_extension.cpp
 )
@@ -62,6 +66,7 @@ set(BINDING_SOURCES
 add_library(rapidadb_core STATIC
     ${KERNEL_SOURCES}
     ${INDEX_SOURCES}
+    ${CORE_SOURCES}
 )
 
 target_link_libraries(rapidadb_core PUBLIC
