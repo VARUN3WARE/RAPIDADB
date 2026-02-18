@@ -17,7 +17,23 @@ namespace rapidadb {
 ///   SearchResult with:
 ///     distances — [batch_size, k], float32
 ///     indices   — [batch_size, k], int64
+
+// Baseline: Thrust/CUB (Week 1)
 SearchResult topk_thrust(
+    const torch::Tensor& distances,
+    int k,
+    bool largest = true
+);
+
+// Week 3: Custom warp-level heap (k <= 128)
+SearchResult topk_warp_heap(
+    const torch::Tensor& distances,
+    int k,
+    bool largest = true
+);
+
+// Week 3: Auto-select best algorithm
+SearchResult topk_auto(
     const torch::Tensor& distances,
     int k,
     bool largest = true

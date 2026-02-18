@@ -1,12 +1,11 @@
 #pragma once
 
 #include <cuda_runtime.h>
+#include "rapidadb/core/cuda_utils.h"
 
 namespace rapidadb {
 
 // Warp-level reduction primitives for Week 3
-
-constexpr int WARP_SIZE = 32;
 
 // Warp-level sum reduction using shuffle
 __device__ __forceinline__ float warp_reduce_sum(float val) {
@@ -17,7 +16,7 @@ __device__ __forceinline__ float warp_reduce_sum(float val) {
     return val;
 }
 
-// Warp-level min reduction using shuffle
+// Warp-level min reduction
 __device__ __forceinline__ float warp_reduce_min(float val) {
     #pragma unroll
     for (int offset = WARP_SIZE / 2; offset > 0; offset /= 2) {
@@ -26,7 +25,7 @@ __device__ __forceinline__ float warp_reduce_min(float val) {
     return val;
 }
 
-// Warp-level max reduction using shuffle
+// Warp-level max reduction
 __device__ __forceinline__ float warp_reduce_max(float val) {
     #pragma unroll
     for (int offset = WARP_SIZE / 2; offset > 0; offset /= 2) {
@@ -35,7 +34,7 @@ __device__ __forceinline__ float warp_reduce_max(float val) {
     return val;
 }
 
-// Block-level reduction using warp shuffle + shared memory between warps
+// Block-level sum using warp shuffles + minimal shared memory
 template<int BLOCK_SIZE>
 __device__ float block_reduce_sum(float val) {
     __shared__ float warp_sums[BLOCK_SIZE / WARP_SIZE];
@@ -43,16 +42,16 @@ __device__ float block_reduce_sum(float val) {
     int lane_id = threadIdx.x % WARP_SIZE;
     int warp_id = threadIdx.x / WARP_SIZE;
     
-    // Reduce within warp
+    // Warp-level reduction
     val = warp_reduce_sum(val);
     
-    // First thread in each warp writes to shared memory
+    // First thread of each warp writes to shared memory
     if (lane_id == 0) {
         warp_sums[warp_id] = val;
     }
     __syncthreads();
     
-    // First warp reduces across warps
+    // Final reduction by first warp
     if (warp_id == 0) {
         val = (lane_id < (BLOCK_SIZE / WARP_SIZE)) ? warp_sums[lane_id] : 0.0f;
         val = warp_reduce_sum(val);

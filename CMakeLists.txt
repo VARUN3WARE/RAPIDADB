@@ -47,6 +47,7 @@ include_directories(
 set(KERNEL_SOURCES
     csrc/kernels/distance.cu
     csrc/kernels/topk.cu
+    csrc/kernels/topk_warp.cu
 )
 
 set(INDEX_SOURCES

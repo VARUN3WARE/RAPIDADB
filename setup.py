@@ -11,6 +11,7 @@ _INCLUDE_DIR = os.path.join(_ROOT, "csrc", "include")
 kernel_sources = [
     os.path.join("csrc", "kernels", "distance.cu"),
     os.path.join("csrc", "kernels", "topk.cu"),
+    os.path.join("csrc", "kernels", "topk_warp.cu"),
 ]
 
 index_sources = [
