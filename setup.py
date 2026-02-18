@@ -12,6 +12,7 @@ kernel_sources = [
     os.path.join("csrc", "kernels", "distance.cu"),
     os.path.join("csrc", "kernels", "topk.cu"),
     os.path.join("csrc", "kernels", "topk_warp.cu"),
+    os.path.join("csrc", "kernels", "fused_l2_topk.cu"),
 ]
 
 index_sources = [
