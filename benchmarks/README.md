@@ -62,12 +62,21 @@ python profile_kernels.py --all
 | Annoy (CPU)   | 6,352 QPS              | 0.17ms        | 1.0%      |
 | FAISS (CPU)   | 226 QPS                | 11.29ms       | **100%**  |
 
-**Progress:**
-- Week 1: 376 QPS (baseline)
-- Week 2-3: 1,331 QPS (3.5x improvement)
-- Week 4: 1,349 QPS (3.6x total improvement)
-- **6x faster than FAISS-CPU** with 100% recall
-- Still 14.6x slower than PyTorch GPU (kernel fusion needed)
+**Progress by Week:**
+
+| Week | Focus                    | QPS   | Speedup vs Week 1 | vs FAISS-CPU |
+| ---- | ------------------------ | ----- | ----------------- | ------------ |
+| 1    | Foundation               | 376   | 1.0x              | 1.7x         |
+| 2    | Memory Optimization      | 1,331 | 3.5x              | 5.9x         |
+| 3    | Warp Primitives          | 1,331 | 3.5x              | 5.9x         |
+| 4    | Multi-Stream Async       | 1,349 | 3.6x              | **6.0x**     |
+
+**Key Achievements:**
+- 3.6x improvement from baseline
+- 6x faster than FAISS-CPU with 100% recall
+- All 27 tests passing
+- Production-ready flat index
+- Still 14.6x slower than PyTorch GPU (kernel fusion needed for bigger gains)
 
 ## Structure
 
