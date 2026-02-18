@@ -52,17 +52,22 @@ python profile_kernels.py --all
 
 ## Current Status
 
-**100K vectors × 768D benchmark:**
+**100K vectors × 768D benchmark (Week 4 - Final):**
 
 | Database      | Throughput @ batch=128 | Latency (p50) | Recall@10 |
 | ------------- | ---------------------- | ------------- | --------- |
-| **RapidaDB**  | 379 QPS                | 6.91ms        | 100%      |
-| PyTorch GPU   | **19,951 QPS**         | **1.78ms**    | 100%      |
-| Hnswlib (CPU) | 8,988 QPS              | 0.32ms        | 4.3%      |
-| Annoy (CPU)   | 6,051 QPS              | 0.17ms        | 0.9%      |
-| FAISS (CPU)   | 145 QPS                | 14.24ms       | 100%      |
+| **RapidaDB**  | **1,349 QPS**          | 5.23ms        | **100%**  |
+| PyTorch GPU   | **19,761 QPS**         | **1.77ms**    | **100%**  |
+| HNSW (CPU)    | 10,088 QPS             | 0.34ms        | 4.1%      |
+| Annoy (CPU)   | 6,352 QPS              | 0.17ms        | 1.0%      |
+| FAISS (CPU)   | 226 QPS                | 11.29ms       | **100%**  |
 
-**Critical Issue:** RapidaDB is 52x slower than PyTorch baseline - needs kernel optimization!
+**Progress:**
+- Week 1: 376 QPS (baseline)
+- Week 2-3: 1,331 QPS (3.5x improvement)
+- Week 4: 1,349 QPS (3.6x total improvement)
+- **6x faster than FAISS-CPU** with 100% recall
+- Still 14.6x slower than PyTorch GPU (kernel fusion needed)
 
 ## Structure
 
