@@ -45,9 +45,21 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
 
     // ─── Top-K ──────────────────────────────────────────────
     m.def("topk", [](const torch::Tensor& distances, int k, bool largest) {
+        auto result = topk_auto(distances, k, largest);
+        return std::make_tuple(result.distances, result.indices);
+    }, "Top-K selection (auto-select best algorithm)",
+       py::arg("distances"), py::arg("k"), py::arg("largest") = true);
+    
+    m.def("topk_thrust", [](const torch::Tensor& distances, int k, bool largest) {
         auto result = topk_thrust(distances, k, largest);
         return std::make_tuple(result.distances, result.indices);
-    }, "Top-K selection (Thrust)",
+    }, "Top-K selection using Thrust/CUB",
+       py::arg("distances"), py::arg("k"), py::arg("largest") = true);
+    
+    m.def("topk_warp_heap", [](const torch::Tensor& distances, int k, bool largest) {
+        auto result = topk_warp_heap(distances, k, largest);
+        return std::make_tuple(result.distances, result.indices);
+    }, "Top-K selection using warp-level heap (k <= 128)",
        py::arg("distances"), py::arg("k"), py::arg("largest") = true);
 
     // ─── FlatIndex ──────────────────────────────────────────
