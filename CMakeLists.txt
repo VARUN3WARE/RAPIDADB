@@ -48,6 +48,7 @@ set(KERNEL_SOURCES
     csrc/kernels/distance.cu
     csrc/kernels/topk.cu
     csrc/kernels/topk_warp.cu
+    csrc/kernels/search_fused.cu
 )
 
 set(INDEX_SOURCES

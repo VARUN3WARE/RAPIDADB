@@ -54,24 +54,16 @@ python profile_kernels.py --all
 
 **100K vectors × 768D benchmark (Week 4 - Final):**
 
-| Database      | Throughput @ batch=128 | Latency (p50) | Recall@10 |
-| ------------- | ---------------------- | ------------- | --------- |
-| **RapidaDB**  | **1,349 QPS**          | 5.23ms        | **100%**  |
-| PyTorch GPU   | **19,761 QPS**         | **1.77ms**    | **100%**  |
-| HNSW (CPU)    | 10,088 QPS             | 0.34ms        | 4.1%      |
-| Annoy (CPU)   | 6,352 QPS              | 0.17ms        | 1.0%      |
-| FAISS (CPU)   | 226 QPS                | 11.29ms       | **100%**  |
-
-**Progress by Week:**
-
-| Week | Focus                    | QPS   | Speedup vs Week 1 | vs FAISS-CPU |
-| ---- | ------------------------ | ----- | ----------------- | ------------ |
-| 1    | Foundation               | 376   | 1.0x              | 1.7x         |
-| 2    | Memory Optimization      | 1,331 | 3.5x              | 5.9x         |
-| 3    | Warp Primitives          | 1,331 | 3.5x              | 5.9x         |
-| 4    | Multi-Stream Async       | 1,349 | 3.6x              | **6.0x**     |
+| Database     | Throughput @ batch=128 | Latency (p50) | Recall@10 |
+| ------------ | ---------------------- | ------------- | --------- |
+| **RapidaDB** | **1,349 QPS**          | 5.23ms        | **100%**  |
+| PyTorch GPU  | **19,761 QPS**         | **1.77ms**    | **100%**  |
+| HNSW (CPU)   | 10,088 QPS             | 0.34ms        | 4.1%      |
+| Annoy (CPU)  | 6,352 QPS              | 0.17ms        | 1.0%      |
+| FAISS (CPU)  | 226 QPS                | 11.29ms       | **100%**  |
 
 **Key Achievements:**
+
 - 3.6x improvement from baseline
 - 6x faster than FAISS-CPU with 100% recall
 - All 27 tests passing
