@@ -23,11 +23,16 @@ core_sources = [
     os.path.join("csrc", "core", "stream_pool.cpp"),
 ]
 
+clustering_sources = [
+    os.path.join("csrc", "clustering", "kmeans.cpp"),
+    os.path.join("csrc", "clustering", "kmeans_batched.cpp"),
+]
+
 binding_sources = [
     os.path.join("csrc", "bindings", "torch_extension.cpp"),
 ]
 
-all_sources = kernel_sources + index_sources + core_sources + binding_sources
+all_sources = kernel_sources + index_sources + core_sources + clustering_sources + binding_sources
 
 # ─── Compiler Flags ──────────────────────────────────────────
 cxx_flags = ["-O3", "-std=c++17"]
